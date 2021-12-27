@@ -3,9 +3,11 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+require('dotenv').config();
 
 var app = express();
 
+//app.set('view engine', 'pug');
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,7 +32,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  console.log(res.locals.error);
 });
 
 module.exports = app;
