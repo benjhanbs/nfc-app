@@ -4,6 +4,10 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 require('dotenv').config();
+const db = require('./db/db');
+const serviceDb = require('./services/db_service');
+
+const itemsRouter = require('./routes/web/items.route')
 
 var app = express();
 
@@ -14,6 +18,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, "build")));
+
+app.use('/web/items', itemsRouter);
+
+serviceDb.init(db);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));

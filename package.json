@@ -1,10 +1,12 @@
 {
   "name": "my-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm i && cd ./client && npm i && npm run build && cp -r build ../src && cd ..",
-    "start": "node ./bin/www"
+    "build": "npm i && cd ./client && npm i && npm run build && cp -r build ../src && cd .. && npm run migrate up",
+    "start": "node ./bin/www",
+    "migrate": "node-pg-migrate",
+    "create-db": "sudo -u postgres createdb nfc_development"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
@@ -24,6 +26,7 @@
     "pg": "^8.7.1",
     "prettier": "^2.5.1",
     "pug": "^3.0.2",
+    "squel": "^5.13.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   }
